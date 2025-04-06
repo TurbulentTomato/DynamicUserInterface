@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  background-color: #888;
+  height: 70px;
+}
+
+.drop-down-container {
+  margin-left: auto;
+  margin-right: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.drop-down-btn {
+  height: 70px;
+  flex: 1 0 100%;
+}
+
+.drop-down-list {
+  height: 200px;
+  flex: 0 1 0px;
+  padding: 5px;
+  background-color: #888;
+  display: none;
+}
+
+.active {
+  display: initial;
+}
