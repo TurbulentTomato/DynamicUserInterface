@@ -1,0 +1,34 @@
+main {
+  flex: 1;
+  border: 2px solid yellow;
+
+  .carousel-container {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+img {
+  width: 500px;
+}
+
+.scroll {
+  width: 80px;
+  height: 50px;
+  align-self: center;
+}
+
+.frame {
+  border: 2px solid blue;
+  width: 500px;
+  overflow: hidden;
+}
+
+.frame,
+.strip {
+  display: flex;
+}
+
+.strip {
+  position: relative;
+}
