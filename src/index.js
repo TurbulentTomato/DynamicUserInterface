@@ -11,13 +11,31 @@ const numberOfImages = 4;
 const width = 500;
 const minPosition = 0;
 const maxPosition = -((numberOfImages - 1) * width);
+let activeIndicator = document.querySelector('[data-position="0"]');
+const indicatorContainer = document.querySelector('.indicator-container');
 
 ddBtn.addEventListener('click', () => {
   toggleDropDown(ddBtn);
 })
 
-previousImgBtn.addEventListener('click', showPreviousImage);
-nextImgBtn.addEventListener('click', showNextImage);
+previousImgBtn.addEventListener('click', () => {
+  showPreviousImage();
+  changeIndicator();
+});
+
+nextImgBtn.addEventListener('click', () => {
+  showNextImage();
+  changeIndicator();
+});
+
+indicatorContainer.addEventListener('click', (event) => {
+  if (event.target === indicatorContainer) {
+    return;
+  }
+  position = -Number(event.target.dataset.position) * width;
+  imageStrip.style.left = `${position}px`;
+  changeIndicator();
+})
 
 function toggleDropDown(btn) {
   btn.closest('[class="drop-down-container"]').querySelector('.drop-down-list').classList.toggle('active');
@@ -39,4 +57,10 @@ function showPreviousImage() {
     position = position + 500;
   }
   imageStrip.style.left = `${position}px`;
+}
+
+function changeIndicator() {
+  activeIndicator.classList.toggle('active-indicator');
+  activeIndicator = document.querySelector(`[data-position="${position / (-width)}"]`);
+  activeIndicator.classList.toggle('active-indicator');
 }
