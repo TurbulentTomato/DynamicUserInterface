@@ -13,6 +13,7 @@ const minPosition = 0;
 const maxPosition = -((numberOfImages - 1) * width);
 let activeIndicator = document.querySelector('[data-position="0"]');
 const indicatorContainer = document.querySelector('.indicator-container');
+let intervalId;
 
 ddBtn.addEventListener('click', () => {
   toggleDropDown(ddBtn);
@@ -32,9 +33,11 @@ indicatorContainer.addEventListener('click', (event) => {
   if (event.target === indicatorContainer) {
     return;
   }
+  clearInterval(intervalId);
   position = -Number(event.target.dataset.position) * width;
   imageStrip.style.left = `${position}px`;
   changeIndicator();
+  createInterval();
 })
 
 function toggleDropDown(btn) {
@@ -42,21 +45,25 @@ function toggleDropDown(btn) {
 }
 
 function showNextImage() {
+  clearInterval(intervalId);
   if (position === maxPosition) {
     position = minPosition;
   } else {
     position = position - 500;
   }
   imageStrip.style.left = `${position}px`;
+  createInterval();
 }
 
 function showPreviousImage() {
+  clearInterval(intervalId);
   if (position === minPosition) {
     position = maxPosition;
   } else {
     position = position + 500;
   }
   imageStrip.style.left = `${position}px`;
+  createInterval();
 }
 
 function changeIndicator() {
@@ -64,3 +71,12 @@ function changeIndicator() {
   activeIndicator = document.querySelector(`[data-position="${position / (-width)}"]`);
   activeIndicator.classList.toggle('active-indicator');
 }
+
+function createInterval() {
+  intervalId = setInterval(() => {
+    showNextImage();
+    changeIndicator();
+  }, 5000);
+}
+
+createInterval();
